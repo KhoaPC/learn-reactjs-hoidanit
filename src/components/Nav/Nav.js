@@ -1,12 +1,15 @@
+import { Link } from "react-router-dom";
 import "./Nav.css";
 
 function Nav() {
   return (
     <>
       <div className="topnav">
-        <a href="/">Home</a>
-        <a href="/todo">Todo Apps</a>
-        <a href="/blog">Blog</a>
+        <Link to="/">Home</Link>
+        <Link to="/todo">Todo Apps</Link>
+        <Link to="/blog">Blog</Link>
+        <Link to="/time">SetInterval</Link>
+        <Link to="/search">Search</Link>
       </div>
     </>
   );

@@ -1,38 +1,85 @@
 import useFetch from "../customize/fetch";
-import './Blog.css';
-import { Link } from "react-router-dom";
+import "./Blog.css";
+import { Link, useHistory } from "react-router-dom";
+import {Button, Modal} from "react-bootstrap";
+import { useState, useEffect } from "react";
+import AddNewBlog from "./AddNewBlog";
 
 const Blog = () => {
+  const [show, setShow] = useState(false);
+  const [newData, setNewData] = useState([]);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
-    const { data: dataBlogs, isLoading, isError }
-        = useFetch(`https://jsonplaceholder.typicode.com/posts`, false);
+  const {
+    data: dataBlogs,
+    isLoading,
+    isError,
+  } = useFetch(`https://jsonplaceholder.typicode.com/posts`, false);
 
-    let newData = [];
+  useEffect(() => {
     if (dataBlogs && dataBlogs.length > 0) {
-        newData = dataBlogs.slice(0, 9)
+      let data = dataBlogs.slice(0, 9);
+      setNewData(data);
     }
+  }, [dataBlogs]);
 
-    return (
-        <div className="blogs-container">
-            {isLoading === false && newData && newData.length > 0 && newData.map(item => {
+  const handleAddNew = (blog) => {
+    let data = newData;
+    data.unshift(blog);
 
-                return (
-                    <div className="single-blog" key={item.id}>
-                        <div className="title">{item.title}</div>
-                        <div className="content">{item.body}</div>
-                        <button>
-                            <Link to={`/blog/${item.id}`}>  View detail</Link>
-                        </button>
-                    </div>
-                )
-            })}
+    setShow(false);
+    setNewData(data);
+  };
 
-            {isLoading === true &&
-                <div style={{ textAlign: 'center !important', width: '100%' }}>Loading data...</div>
-            }
-        </div>
+  const deletePost = (id) => {
+    let data = newData;
+    data = data.filter((item) => item.id !== id);
+    setNewData(data);
+  };
 
-    )
-}
+  return (
+    <>
+
+      <Button variant="primary" className="btn-add my-3" onClick={handleShow}>
+        + Add new blog
+      </Button>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add New Blog</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <AddNewBlog handleAddNew={handleAddNew} />
+        </Modal.Body>
+      </Modal>
+
+      <div className="blogs-container">
+        {isLoading === false &&
+          newData &&
+          newData.length > 0 &&
+          newData.map((item) => {
+            return (
+              <div className="single-blog" key={item.id}>
+                <div className="title">
+                  <span>{item.title} </span>
+                  <span onClick={() => deletePost(item.id)}>X</span>
+                </div>
+                <div className="content">{item.body}</div>
+                <button>
+                  <Link to={`/blog/${item.id}`}> View detail</Link>
+                </button>
+              </div>
+            );
+          })}
+
+        {isLoading === true && (
+          <div style={{ textAlign: "center !important", width: "100%" }}>
+            Loading data...
+          </div>
+        )}
+      </div>
+    </>
+  );
+};
 
 export default Blog;
