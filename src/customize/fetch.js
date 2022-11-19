@@ -1,60 +1,50 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import {formatDate} from '../utils'
+import { formatDate } from "../utils";
 
 const useFetch = (url, isCovidData) => {
-    const [data, setData] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [isError, setIsError] = useState(false);
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
-    useEffect(() => {
-        const ourRequest = axios.CancelToken.source() // <-- 1st step
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        let res = await axios.get(url, {});
 
-        async function fetchData() {
-            try {
-                let res = await axios.get(url, {
-                    cancelToken: ourRequest.token, // <-- 2nd step
-                })
-
-                let data = (res && res.data) ? res.data : []; // true, false
-                if (data && data.length > 0 && isCovidData === true) {
-                    data.map(item => {
-                        item.Date = formatDate('DD/MM/YYYY' ,item.Date);
-                        return item;
-                    })
-                    data = data.reverse()
-                }
-                setData(data);
-                setIsLoading(false);
-                setIsError(false);
-
-            }
-
-            catch (err) {
-                if (axios.isCancel(err)) {
-                    console.log('Request canceled', err.message);
-                } else {
-                    setIsError(true);
-                    setIsLoading(false);
-                }
-
-            }
+        let data = res && res.data ? res.data : [];
+        if (data && data.length > 0 && isCovidData === true) {
+          data.map((item) => {
+            item.Date = formatDate("DD/MM/YYYY", item.Date);
+            return item;
+          });
+          data = data.reverse();
         }
-
-        setTimeout(() => {
-            fetchData();
-        }, 3000);
-
-        return () => {
-            ourRequest.cancel('Operation canceled by the user.') // <-- 3rd step
-        }
-
-    }, [url]);
-
-    return {
-        data, isLoading, isError
+        setData(data);
+        setIsLoading(false);
+        setIsError(false);
+      } catch (err) {
+        setIsError(true);
+        setIsLoading(false);
+      }
     }
 
-}
+    const job = setTimeout(() => {
+      fetchData();
+    }, 2000);
+
+    return () => {
+      console.log("Request canceled by user");
+      // Hủy request khi chuyển route
+      window.clearTimeout(job);
+    };
+  }, [url]);
+
+  return {
+    data,
+    isLoading,
+    isError,
+  };
+};
 
 export default useFetch;
