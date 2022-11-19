@@ -56,15 +56,14 @@
   margin: 0 auto;
   text-align: left;
 }
-.add-new-container.text-add-new {
+.text-add-new {
   margin: 10px 0;
   text-align: center;
 }
 
-.add-new-container.inputs-data {
+.inputs-data {
   padding: 5px;
   margin: 5px;
-
   display: flex;
   flex-direction: column;
 }
@@ -114,4 +113,9 @@
   margin-bottom: 20px;
   font-size: 18px;
   font-weight: 600;
+}
+
+
+.hide{
+  display: none;
 }

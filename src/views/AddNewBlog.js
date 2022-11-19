@@ -7,27 +7,25 @@ const AddNewBlog = (props) => {
     const [content, setContent] = useState('');
 
     const handleSubmitBtn = async () => {
-        if (!title) {
-            alert('empty title');
-            return;
-        }
-        if (!content) {
-            alert('empty content')
+        if (!title || !content) {           
             return;
         }
 
         let data = {
             title: title,
             body: content,
-            userId: 1,
+            id: Math.floor(Math.random() * 100000 + 1),
+            userId: Math.floor(Math.random() * 100000 + 1),
         }
 
         let res = await axios.post('https://jsonplaceholder.typicode.com/posts', data);
         if (res && res.data) {
-            let newBlog = res.data;
+            const newBlog = res.data;
             props.handleAddNew(newBlog);
         }
 
+        setTitle('')
+        setContent('')
     }
 
     return (

@@ -1,16 +1,17 @@
 import useFetch from "../customize/fetch";
 import "./Blog.css";
-import { Link, useHistory } from "react-router-dom";
-import {Button, Modal} from "react-bootstrap";
+import { Link, useLocation } from "react-router-dom";
+import { Button, Modal } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import AddNewBlog from "./AddNewBlog";
 
 const Blog = () => {
   const [show, setShow] = useState(false);
   const [newData, setNewData] = useState([]);
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  
   const {
     data: dataBlogs,
     isLoading,
@@ -21,37 +22,32 @@ const Blog = () => {
     if (dataBlogs && dataBlogs.length > 0) {
       let data = dataBlogs.slice(0, 9);
       setNewData(data);
+      console.log(newData)
     }
   }, [dataBlogs]);
 
   const handleAddNew = (blog) => {
-    let data = newData;
-    data.unshift(blog);
+    setNewData((current) => [blog, ...current]);
 
     setShow(false);
-    setNewData(data);
   };
 
   const deletePost = (id) => {
-    let data = newData;
-    data = data.filter((item) => item.id !== id);
-    setNewData(data);
+    setNewData((current) => current.filter((item) => item.id !== id));
   };
 
   return (
     <>
-
-      <Button variant="primary" className="btn-add my-3" onClick={handleShow}>
+      <button className="btn-add" onClick={handleShow}>
         + Add new blog
-      </Button>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add New Blog</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+      </button>
+      <div className={!show && 'hide'}>
+        <span onClick={handleClose}>X...</span>
+        <span>Add New Blog</span>
+        <div>
           <AddNewBlog handleAddNew={handleAddNew} />
-        </Modal.Body>
-      </Modal>
+        </div>
+      </div>
 
       <div className="blogs-container">
         {isLoading === false &&
