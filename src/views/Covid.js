@@ -43,7 +43,7 @@ const Covid = () => {
           {isLoading === true && (
             <tr>
               <td colSpan="5" style={{ textAlign: "center" }}>
-                {" "}
+                
                 Loading...
               </td>
             </tr>
@@ -52,8 +52,7 @@ const Covid = () => {
           {isError === true && (
             <tr>
               <td colSpan="5" style={{ textAlign: "center" }}>
-                {" "}
-                Something wrong...{" "}
+                Something wrong...
               </td>
             </tr>
           )}

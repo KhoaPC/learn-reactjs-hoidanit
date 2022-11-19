@@ -30,11 +30,8 @@ const AddNewBlog = (props) => {
 
     }
 
-
-
     return (
         <div className="add-new-container">
-
             <div className="text-add-new">---Add new blogs ---</div>
             <div className="inputs-data">
                 <label>Title: </label>
