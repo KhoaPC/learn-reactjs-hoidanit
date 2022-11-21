@@ -5,19 +5,12 @@ import Blog from "./views/Blog";
 import Time from "./views/Time";
 import DetailBlog from "./views/DetailBlog";
 import Todo from "./views/Todo";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Link,
-  redirect,
-} from "react-router-dom";
-import { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Nav from "./components/Nav/Nav";
 import YoutubeSearch from "./views/YoutubeSearch";
-
 function App() {
   return (
+    // Add router
     <Router>
       <Nav></Nav>
       <div className="App">
@@ -43,26 +36,8 @@ function App() {
 export default App;
 
 /*
-foo {
-  color: ${p => p.active : 'red' : 'black'};
-
-  & .active {
-    font-weight: bold;
-  }
-}
-
 // styled-components ~scss
 // emotion           ~scss
 // tailwind
-
-// css
-
 // server-side style
-
-.modu
-
-
-export function Foo() {
-  return <Foo active={true}></Foo>
-}
 */
