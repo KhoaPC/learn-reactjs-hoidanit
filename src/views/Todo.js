@@ -39,7 +39,7 @@ const Todo = () => {
             <div key={todo.id}>
               <li className="todo-child">
                 {todo.title}
-                <span onClick={() => handleDelete(todo.id)}>   x</span>
+                <span onClick={() => handleDelete(todo.id)}> x</span>
               </li>
             </div>
           );
