@@ -61,7 +61,10 @@ function Blog() {
                 </div>
                 <div className="content">{item.body}</div>
                 <button>
-                  <Link to={`/blog/${item.id}`}> View detail</Link>
+                  {/* Truyền item qua prop state (useLocation.state) */}
+                  <Link to={`/blog/${item.id}`} state={item}>
+                    View detail
+                  </Link>
                 </button>
               </div>
             );
@@ -78,3 +81,9 @@ function Blog() {
 }
 
 export default Blog;
+
+/**
+ * Khi học thì:
+ * Commit kiến thức mới !tính năng
+ * 
+ */

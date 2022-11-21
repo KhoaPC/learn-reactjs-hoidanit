@@ -2,7 +2,12 @@ import { useParams, useLocation } from "react-router-dom";
 import useFetch from "../utils/fetch";
 import "./Blog.css";
 import { Link } from "react-router-dom";
-const DetailBlog = () => {
+
+function DetailBlog() {
+  // Lấy item từ <Link state={item}/>  
+  const location = useLocation();
+  console.log(location.state);
+
   let { id } = useParams();
 
   const {
@@ -29,6 +34,6 @@ const DetailBlog = () => {
       </div>
     </>
   );
-};
+}
 
 export default DetailBlog;
