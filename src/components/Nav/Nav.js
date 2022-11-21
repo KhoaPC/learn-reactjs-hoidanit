@@ -1,15 +1,16 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Nav.css";
-// Nav header
+
 function Nav() {
   return (
+    // Style tab active qua class 'active'
     <>
       <div className="topnav">
-        <Link to="/">Home</Link>
-        <Link to="/todo">Todo Apps</Link>
-        <Link to="/blog">Blog</Link>
-        <Link to="/time">SetInterval</Link>
-        <Link to="/search">Search</Link>
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/todo">Todo Apps</NavLink>
+        <NavLink to="/blog">Blog</NavLink>
+        <NavLink to="/time">SetInterval</NavLink>
+        <NavLink to="/search">Search</NavLink>
       </div>
     </>
   );
