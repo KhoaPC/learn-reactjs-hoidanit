@@ -1,7 +1,7 @@
 import "./Blog.css";
 import axios from "axios";
 import { useState } from "react";
-import {formatDate} from '../utils'
+import { formatDate } from "../utils";
 
 const YoutubeSearch = () => {
   const [videos, setVideos] = useState([]);
@@ -71,7 +71,7 @@ const YoutubeSearch = () => {
               <div className="right">
                 <div className="title">{item.title}</div>
                 <div className="created-at">
-                  {formatDate('DD-MM-YYYY',item.createdAt)}
+                  {formatDate("DD-MM-YYYY", item.createdAt)}
                 </div>
                 <div className="author">{item.author}</div>
                 <div className="description">{item.description}</div>
