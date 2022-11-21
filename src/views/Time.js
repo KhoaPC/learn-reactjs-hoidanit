@@ -10,6 +10,7 @@ function Time() {
       if (running) setSecond((current) => ++current);
     }, 1_000);
 
+    // Clean up
     return () => clearInterval(ref.current);
   }, [running]);
 
