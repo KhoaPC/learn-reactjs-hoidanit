@@ -1,34 +1,31 @@
-import useFetch from "../customize/fetch";
+import useFetch from "../utils/fetch";
 import "./Blog.css";
-import { Link, useLocation } from "react-router-dom";
-import { Button, Modal } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import AddNewBlog from "./AddNewBlog";
 
-const Blog = () => {
+// Component Blog
+function Blog() {
   const [show, setShow] = useState(false);
   const [newData, setNewData] = useState([]);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
-  const {
-    data: dataBlogs,
-    isLoading,
-    isError,
-  } = useFetch(`https://jsonplaceholder.typicode.com/posts`, false);
+
+  const { data: dataBlogs, isLoading } = useFetch(
+    `https://jsonplaceholder.typicode.com/posts`,
+    false
+  );
 
   useEffect(() => {
     if (dataBlogs && dataBlogs.length > 0) {
       let data = dataBlogs.slice(0, 9);
       setNewData(data);
-      console.log(newData)
+      console.log(newData);
     }
   }, [dataBlogs]);
 
   const handleAddNew = (blog) => {
     setNewData((current) => [blog, ...current]);
-
     setShow(false);
   };
 
@@ -41,8 +38,10 @@ const Blog = () => {
       <button className="btn-add" onClick={handleShow}>
         + Add new blog
       </button>
-      <div className={!show && 'hide'}>
-        <span onClick={handleClose}>X...</span>
+      <div className={!show && "hide"}>
+        <span className="close" onClick={handleClose}>
+          X
+        </span>
         <span>Add New Blog</span>
         <div>
           <AddNewBlog handleAddNew={handleAddNew} />
@@ -76,6 +75,6 @@ const Blog = () => {
       </div>
     </>
   );
-};
+}
 
 export default Blog;
