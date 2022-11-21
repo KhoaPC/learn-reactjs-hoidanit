@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import useFetch from "../customize/fetch";
+import useFetch from "../utils/fetch";
 
 const Covid = () => {
   const {
@@ -43,7 +42,6 @@ const Covid = () => {
           {isLoading === true && (
             <tr>
               <td colSpan="5" style={{ textAlign: "center" }}>
-                
                 Loading...
               </td>
             </tr>

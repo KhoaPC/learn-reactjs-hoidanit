@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { formatDate } from ".";
+import { formatDate } from "./index";
 
 const useFetch = (url, isCovidData) => {
   const [data, setData] = useState([]);
