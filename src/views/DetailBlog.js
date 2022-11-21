@@ -1,5 +1,5 @@
 import { useParams, useLocation } from 'react-router-dom';
-import useFetch from '../customize/fetch';
+import useFetch from '../utils/fetch';
 import './Blog.css';
 import { Link} from 'react-router-dom';
 const DetailBlog = () => {
