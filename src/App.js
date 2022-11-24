@@ -12,7 +12,7 @@ function App() {
   return (
     // Add router
     <Router>
-      <Nav></Nav>
+      <Nav />
       <div className="App">
         <img src={logo} className="App-logo" alt="logo" />
         <Routes>
@@ -27,6 +27,13 @@ function App() {
           ></Route>
 
           <Route path="/todo" element={<Todo />}></Route>
+       
+          {/* 404 page
+            * : tất các các path khác trừ các path đã định nghĩa trước đó 
+          */}
+          <Route path="*" element={(
+            <h1>Hello 404 page</h1>
+          )}></Route>
         </Routes>
       </div>
     </Router>
