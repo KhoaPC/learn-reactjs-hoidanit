@@ -8,6 +8,7 @@ import Todo from "./views/Todo";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Nav from "./components/Nav/Nav";
 import YoutubeSearch from "./views/YoutubeSearch";
+import OTP from "./OTP/OTP";
 function App() {
   return (
     // Add router
@@ -27,6 +28,8 @@ function App() {
           ></Route>
 
           <Route path="/todo" element={<Todo />}></Route>
+          
+          <Route path="/otp" element={<OTP />}></Route>
        
           {/* 404 page
             * : tất các các path khác trừ các path đã định nghĩa trước đó 
@@ -47,4 +50,6 @@ export default App;
 // emotion           ~scss
 // tailwind
 // server-side style
+
+-challenge: ~tippy, ~react-otp-input, ~react-image-lightbox
 */

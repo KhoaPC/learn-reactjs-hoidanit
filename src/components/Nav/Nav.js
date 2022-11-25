@@ -10,6 +10,7 @@ function Nav() {
         <NavLink to="/todo">Todo Apps</NavLink>
         <NavLink to="/blog">Blog</NavLink>
         <NavLink to="/time">SetInterval</NavLink>
+        <NavLink to="/otp">OTP</NavLink>
         <NavLink to="/search">Search</NavLink>
       </div>
     </>
